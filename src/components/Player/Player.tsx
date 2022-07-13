@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useMemo, useRef} from 'react';
 import './Player.scss';
 import PlayerPlaylist from "./PlayerPlaylist";
 import {useAppDispatch, useAppSelector} from "redux/hooks";
@@ -10,6 +10,7 @@ import {
 } from "redux/playerSlice";
 import {SongInfoI} from "./Player.types";
 import PlayerControl from "./PlayerControl";
+import _ from "lodash";
 
 
 const Player: React.FC = () => {
@@ -30,14 +31,19 @@ const Player: React.FC = () => {
 	}
 
 	const onAudioTimeUpdate = () => {
+		console.log('onAudioTimeUpdate');
 		if (!currentAudio.current) return;
 		dispatch(setCurrentTime(currentAudio.current.currentTime));
 	}
 
+	const throttledOnAudioTimeUpdate = useMemo(
+		() => _.throttle(onAudioTimeUpdate, 800),
+		[]);
+
 	const audioOnCanPlay = (e: Event) => {
 		if (!currentAudio.current) return;
 		currentAudio.current.play();
-		currentAudio.current.addEventListener('timeupdate', onAudioTimeUpdate);
+		currentAudio.current.addEventListener('timeupdate', throttledOnAudioTimeUpdate);
 		isAudioPlayPressed.current = false;
 		dispatch(setIsPlayingNow(true));
 	}
@@ -76,6 +82,12 @@ const Player: React.FC = () => {
 
 		if (song) playNewSong(song);
 	}
+
+	useEffect(() => {
+		return () => {
+			throttledOnAudioTimeUpdate.cancel();
+		}
+	}, []);
 
 	return <div className="player-wrapper">
 		<div className="player">
