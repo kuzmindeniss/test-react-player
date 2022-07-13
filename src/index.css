@@ -6,3 +6,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  background-color:#ff999e;
+  background-image:
+    radial-gradient(at 67% 48%, hsla(331,67%,61%,1) 0px, transparent 50%),
+    radial-gradient(at 32% 2%, hsla(303,98%,65%,1) 0px, transparent 50%),
+    radial-gradient(at 16% 14%, hsla(117,92%,60%,1) 0px, transparent 50%),
+    radial-gradient(at 61% 46%, hsla(238,61%,75%,1) 0px, transparent 50%),
+    radial-gradient(at 10% 93%, hsla(305,66%,68%,1) 0px, transparent 50%),
+    radial-gradient(at 50% 52%, hsla(28,97%,67%,1) 0px, transparent 50%),
+    radial-gradient(at 88% 32%, hsla(297,66%,76%,1) 0px, transparent 50%);
+}

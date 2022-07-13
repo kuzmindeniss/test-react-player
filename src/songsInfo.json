@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "url": "https://mrr.morsmusic.org/load/468069122/Symphocat_-_Long_Whale_Song_(musmore.com).mp3",
+    "artist": "SymphoCat",
+    "name": "Long Whale Song",
+    "duration": 1165.4008,
+    "images": {
+      "width500": "https://i1.sndcdn.com/artworks-p27OS50HujtX-0-t500x500.jpg",
+      "width120": "https://i1.sndcdn.com/artworks-p27OS50HujtX-0-t120x120.jpg"
+    }
+  },
+  {
+    "id": 2,
+    "url": "https://mrr.morsmusic.org/load/1008653377/Harmless_-_Swing_Lynn_(musmore.com).mp3",
+    "artist": "Harmless",
+    "name": "Swing Lynn",
+    "duration": 448.026122,
+    "images": {
+      "width500": "https://i1.sndcdn.com/artworks-000028655569-uk4f1a-t500x500.jpg",
+      "width120": "https://i1.sndcdn.com/artworks-000028655569-uk4f1a-t120x120.jpg"
+    }
+  },
+  {
+    "id": 3,
+    "url": "https://mrr.morsmusic.org/load/1423794622/Boris_Brejcha_Laura_Korinth_-_Gravity_(musmore.com).mp3",
+    "artist": "Boris Brejcha",
+    "name": "Gravity (feat. Laura Korinth)",
+    "duration": 564.5061,
+    "images": {
+      "width500": "https://i1.sndcdn.com/artworks-000669518188-fex3jw-t500x500.jpg",
+      "width120": "https://i1.sndcdn.com/artworks-000669518188-fex3jw-t120x120.jpg"
+    }
+  }
+]
