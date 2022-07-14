@@ -5,7 +5,6 @@ import {convertDurationNumberIntoString} from "utils/utils";
 import {AiOutlineClockCircle, AiOutlineProfile, AiOutlineUser, AiOutlineFileImage} from "react-icons/ai";
 import {FaPlay, FaPause} from "react-icons/fa"
 import {SongInfoI} from "./Player.types";
-import {Link, useNavigate} from "react-router-dom";
 import {TbSortDescending} from "react-icons/tb";
 
 

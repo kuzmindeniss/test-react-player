@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import {useAppSelector} from "redux/hooks";
-import {selectCurrentSong, selectSongById} from "redux/playerSlice";
-import {useNavigate, useParams} from "react-router-dom";
+import {selectCurrentSong} from "redux/playerSlice";
 import {SongInfoI} from "./Player.types";
 import WaveForm from "./WaveForm";
 

@@ -7,7 +7,7 @@ import {
 } from "react-icons/bs";
 import {selectCurrentSong, selectCurrentTime, selectIsPlayingNow} from "redux/playerSlice";
 import {SongInfoI} from "./Player.types";
-import {convertDurationNumberIntoString} from "../../utils/utils";
+import {convertDurationNumberIntoString} from "utils/utils";
 import {useAppSelector} from "redux/hooks";
 import {Link} from "react-router-dom";
 
