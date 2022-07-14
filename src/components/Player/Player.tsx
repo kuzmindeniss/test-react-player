@@ -3,7 +3,7 @@ import './Player.scss';
 import PlayerPlaylist from "./PlayerPlaylist";
 import {useAppDispatch, useAppSelector} from "redux/hooks";
 import {
-	selectCurrentSong,
+	selectCurrentSong, selectPlaylistSongs,
 	setCurrentSong,
 	setCurrentTime,
 	setIsPlayingNow
@@ -11,12 +11,15 @@ import {
 import {SongInfoI} from "./Player.types";
 import PlayerControl from "./PlayerControl";
 import _ from "lodash";
-
+import {Route, Routes} from "react-router-dom";
+import PlayerSong from "./PlayerSong";
+import PlayerHeader from "./PlayerHeader";
 
 const Player: React.FC = () => {
 	const currentAudio = useRef<HTMLAudioElement>();
 	const isAudioPlayPressed = useRef<boolean>(false);
 	const currentSong = useAppSelector(selectCurrentSong);
+	const playlistSongs = useAppSelector(selectPlaylistSongs);
 	const dispatch = useAppDispatch();
 
 	const seekTime = (t: number) => {
@@ -31,7 +34,6 @@ const Player: React.FC = () => {
 	}
 
 	const onAudioTimeUpdate = () => {
-		console.log('onAudioTimeUpdate');
 		if (!currentAudio.current) return;
 		dispatch(setCurrentTime(currentAudio.current.currentTime));
 	}
@@ -48,6 +50,7 @@ const Player: React.FC = () => {
 		dispatch(setIsPlayingNow(true));
 	}
 
+
 	const playNewSong = (song: SongInfoI): void => {
 		if (isAudioPlayPressed.current) return;
 		isAudioPlayPressed.current = true;
@@ -62,6 +65,9 @@ const Player: React.FC = () => {
 		dispatch(setCurrentSong(song));
 		dispatch(setCurrentTime(0));
 		audio.addEventListener('canplay', audioOnCanPlay);
+		audio.addEventListener('error', (e) => {
+			console.log(`error`);
+		});
 	}
 
 	const continuePlaying = () => {
@@ -79,8 +85,21 @@ const Player: React.FC = () => {
 			continuePlaying();
 			return;
 		}
-
 		if (song) playNewSong(song);
+	}
+
+	const nextTrack = (songs: SongInfoI[]  = playlistSongs) => {
+		if (!currentSong) return;
+		let idx = songs.indexOf(currentSong) + 1;
+		if (idx >= songs.length) idx = 0;
+		play(songs[idx]);
+	}
+
+	const prevTrack = (songs: SongInfoI[] = playlistSongs) => {
+		if (!currentSong) return;
+		let idx = songs.indexOf(currentSong) - 1;
+		if (idx < 0) idx = songs.length - 1;
+		play(songs[idx]);
 	}
 
 	useEffect(() => {
@@ -91,8 +110,13 @@ const Player: React.FC = () => {
 
 	return <div className="player-wrapper">
 		<div className="player">
-			<PlayerPlaylist play={play} pause={pause}/>
-			<PlayerControl seek={seekTime} play={play} pause={pause}/>
+			<PlayerHeader/>
+			<Routes>
+				<Route path="/" element={<PlayerPlaylist play={play} pause={pause}/>} />
+				<Route path="/song/:id" element={<PlayerSong play={play}/>} />
+				<Route path="*" element={<PlayerPlaylist play={play} pause={pause}/>} />
+			</Routes>
+			<PlayerControl prev={prevTrack} next={nextTrack} seek={seekTime} play={play} pause={pause}/>
 		</div>
 	</div>
 }

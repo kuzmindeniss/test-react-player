@@ -5,6 +5,7 @@ import {convertDurationNumberIntoString} from "utils/utils";
 import {AiOutlineClockCircle, AiOutlineProfile, AiOutlineUser, AiOutlineFileImage} from "react-icons/ai";
 import {FaPlay, FaPause} from "react-icons/fa"
 import {SongInfoI} from "./Player.types";
+import {Link, useNavigate} from "react-router-dom";
 
 
 interface PlayerPlaylistPropsI {
@@ -16,6 +17,7 @@ const PlayerPlaylist: React.FC<PlayerPlaylistPropsI> = (props: PlayerPlaylistPro
 	const songs = useAppSelector(selectPlaylistSongs);
 	const currentSong = useAppSelector(selectCurrentSong);
 	const isPlayingNow = useAppSelector(selectIsPlayingNow);
+	const navigate = useNavigate();
 
 	const isSongPlayingNow = (song: SongInfoI): boolean => {
 		if (!currentSong) return false;
@@ -32,7 +34,7 @@ const PlayerPlaylist: React.FC<PlayerPlaylistPropsI> = (props: PlayerPlaylistPro
 					{!isSongPlayingNow(item) && <FaPlay onClick={() => props.play(item)} size={30} className="player-playlist__item-play"/>}
 					{isSongPlayingNow(item) && <FaPause onClick={() => props.pause()} size={30} className="player-playlist__item-play"/>}
 				</div>
-				<div className="player-playlist__item-name">{item.name}</div>
+				<div className="player-playlist__item-name"><Link to={`/song/${item.id}`}>{item.name}</Link></div>
 				<div className="player-playlist__item-artist">{item.artist}</div>
 				<div className="player-playlist__item-time">{convertDurationNumberIntoString(item.duration)}</div>
 			</li>)

@@ -40,3 +40,10 @@ export const selectPlaylistSongs = (state: RootState) => state.player.playlistSo
 export const selectIsPlayingNow = (state: RootState) => state.player.isPlayingNow;
 export const selectCurrentSong = (state: RootState) => state.player.currentSong;
 export const selectCurrentTime = (state: RootState) => state.player.currentTime;
+export const selectSongById = (state: RootState, songId?: number | string) => {
+	if (!songId) return null;
+	if (typeof songId === 'string') {
+		return state.player.playlistSongs.filter(item => item.id === parseInt(songId))[0] || null;
+	}
+	return state.player.playlistSongs.filter(item => item.id === songId)[0] || null;
+}

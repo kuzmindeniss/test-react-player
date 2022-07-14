@@ -9,12 +9,15 @@ import {selectCurrentSong, selectCurrentTime, selectIsPlayingNow} from "redux/pl
 import {SongInfoI} from "./Player.types";
 import {convertDurationNumberIntoString} from "../../utils/utils";
 import {useAppSelector} from "redux/hooks";
+import {Link} from "react-router-dom";
 
 
 interface PlayerControlI {
 	play: () => void;
 	pause: (song?: SongInfoI) => void;
 	seek: (t: number) => void;
+	next: (songs?: SongInfoI[]) => void;
+	prev: (songs?: SongInfoI[]) => void;
 }
 
 const PlayerControl: React.FC<PlayerControlI> = (props: PlayerControlI) => {
@@ -28,7 +31,7 @@ const PlayerControl: React.FC<PlayerControlI> = (props: PlayerControlI) => {
 		return <React.Fragment>
 			<img className="player-control--song-img" src={currentSong.images.width120} alt="song" width={45} height={45}/>
 			<div className="player-control--song-info">
-				<span className="player-control--song-name">{currentSong.name}</span>
+				<Link to={`song/${currentSong.id}`} className="player-control--song-name">{currentSong.name}</Link>
 				<span className="player-control--song-artist">{currentSong.artist}</span>
 			</div>
 		</React.Fragment>
@@ -53,10 +56,10 @@ const PlayerControl: React.FC<PlayerControlI> = (props: PlayerControlI) => {
 					{getCurrentSongInfo()}
 				</div>
 				<div className="player-control__top-center">
-					<BsFillSkipBackwardFill size={'1.6em'}/>
+					<BsFillSkipBackwardFill size={'1.6em'} onClick={() => props.prev()}/>
 					{isPlayingNow && <BsFillPauseCircleFill size={'2.2em'} onClick={() => props.pause()}/>}
 					{!isPlayingNow && <BsFillPlayCircleFill size={'2.2em'} onClick={() => props.play()}/>}
-					<BsFillSkipForwardFill size={'1.6em'} onClick={() => props.seek(100)}/>
+					<BsFillSkipForwardFill size={'1.6em'} onClick={() => props.next()}/>
 				</div>
 				<div className="player-control__top-right"></div>
 			</div>
