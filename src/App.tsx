@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import Player from "./components/Player/Player";
 import {BrowserRouter} from "react-router-dom";
 
