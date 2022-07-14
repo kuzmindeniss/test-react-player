@@ -31,7 +31,7 @@ const PlayerControl: React.FC<PlayerControlI> = (props: PlayerControlI) => {
 		return <React.Fragment>
 			<img className="player-control--song-img" src={currentSong.images.width120} alt="song" width={45} height={45}/>
 			<div className="player-control--song-info">
-				<Link to={`song/${currentSong.id}`} className="player-control--song-name">{currentSong.name}</Link>
+				<Link to={`song`} className="player-control--song-name">{currentSong.name}</Link>
 				<span className="player-control--song-artist">{currentSong.artist}</span>
 			</div>
 		</React.Fragment>

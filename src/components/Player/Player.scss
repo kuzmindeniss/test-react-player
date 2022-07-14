@@ -66,8 +66,13 @@
   display: flex;
   align-items: center;
   opacity: .6;
+  cursor: pointer;
+  transition: all .3s;
 }
 
+.player-playlist__header li:hover {
+  opacity: 1;
+}
 
 .player-playlist__item>div {
   overflow: hidden;
@@ -114,9 +119,12 @@
 .player-playlist__item {
   display: flex;
   align-items: center;
-  cursor: pointer;
   border-radius: 8px;
   transition: all .2s;
+}
+
+.player-playlist__item>div:first-child {
+  cursor: pointer;
 }
 
 .player-playlist__item:hover {

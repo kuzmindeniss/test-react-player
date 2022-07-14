@@ -113,7 +113,7 @@ const Player: React.FC = () => {
 			<PlayerHeader/>
 			<Routes>
 				<Route path="/" element={<PlayerPlaylist play={play} pause={pause}/>} />
-				<Route path="/song/:id" element={<PlayerSong play={play}/>} />
+				<Route path="/song" element={<PlayerSong play={play}/>} />
 				<Route path="*" element={<PlayerPlaylist play={play} pause={pause}/>} />
 			</Routes>
 			<PlayerControl prev={prevTrack} next={nextTrack} seek={seekTime} play={play} pause={pause}/>

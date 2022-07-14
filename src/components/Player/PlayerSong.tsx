@@ -10,32 +10,21 @@ interface PlayerSongPropsI {
 }
 
 const PlayerSong: React.FC<PlayerSongPropsI> = (props: PlayerSongPropsI) => {
-	const { id } = useParams();
-	const song: SongInfoI | null = useAppSelector(state => selectSongById(state, id));
 	const currentSong = useAppSelector(selectCurrentSong);
-	const navigate = useNavigate();
-
 
 	useEffect(() => {
-		if (!currentSong || !song) return;
-		if (currentSong.id !== song.id) {
-			navigate(`/song/${currentSong.id}`);
-		}
-	}, [currentSong]);
-
-	useEffect(() => {
-		if (!song) return;
-		props.play(song);
+		if (!currentSong) return;
+		props.play(currentSong);
 	}, [])
 
-	if (song === null) return <div>
-		<h2>Song not found</h2>
+	if (currentSong === null) return <div>
+		<h2>Not playing now</h2>
 	</div>
 
 	return <div className="player-song__wrapper">
 		<h2>Song page</h2>
 		<div className="player-song__content">
-			<img src={song.images.width500} width={500} height={500} alt="photo"/>
+			<img src={currentSong.images.width500} width={500} height={500} alt="photo"/>
 			<WaveForm />
 		</div>
 	</div>
