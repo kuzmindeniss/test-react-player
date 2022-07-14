@@ -26,7 +26,6 @@ const PlayerPlaylist: React.FC<PlayerPlaylistPropsI> = (props: PlayerPlaylistPro
 
 	const getFilteredSongs = (): SongInfoI[] => {
 		let sortedSongs = [...songs];
-		console.log(sort);
 		if (sort === 'title') {
 			sortedSongs = sortedSongs.sort((a, b) => {
 				return a.name > b.name ? 1 : -1;
